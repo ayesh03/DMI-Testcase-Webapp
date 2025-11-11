@@ -8922,7 +8922,10 @@ document.getElementById("generateReportBtn").addEventListener("click", async () 
   try {
     showNotification("Uploading screenshots to backend...", "info");
 
-    const response = await fetch("http://localhost:5000/generate-report", {
+    //  Use  Render backend URL here
+    const BASE_URL = "https://dmi-testcase-webapp.onrender.com";
+
+    const response = await fetch(`${BASE_URL}/generate-report`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ screenshots }),
@@ -8933,8 +8936,8 @@ document.getElementById("generateReportBtn").addEventListener("click", async () 
       showNotification("Report generated successfully!", "success");
       logLine("INFO: Report generated successfully on backend.");
 
-      // Auto-download file
-      window.location.href = "http://localhost:5000/download";
+      //  Auto-download file from your Render backend
+      window.location.href = `${BASE_URL}/download`;
     } else {
       showNotification("Failed to generate report.", "error");
       logLine(`ERROR: ${result.error}`);
@@ -8944,7 +8947,6 @@ document.getElementById("generateReportBtn").addEventListener("click", async () 
     showNotification("Error connecting to backend.", "error");
   }
 });
-
 
   </script>
 
